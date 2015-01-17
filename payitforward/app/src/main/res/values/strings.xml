@@ -8,5 +8,7 @@
     <string name="string_donation1">Pizza</string>
     <string name="string_donation2">Socks</string>
     <string name="string_donation3">Care Package</string>
+    <string name="title_activity_info">Information</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
