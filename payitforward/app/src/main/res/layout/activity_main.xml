@@ -22,7 +22,8 @@
         android:id="@+id/button_login"
         android:layout_marginBottom="32dp"
         android:layout_above="@+id/button"
-        android:layout_alignEnd="@+id/button" />
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
 
     <Button
         android:layout_width="wrap_content"
@@ -31,5 +32,6 @@
         android:id="@+id/button"
         android:layout_marginBottom="80dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignEnd="@+id/button_login" />
 </RelativeLayout>
