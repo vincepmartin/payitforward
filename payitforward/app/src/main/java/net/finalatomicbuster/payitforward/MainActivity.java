@@ -18,11 +18,15 @@ public class MainActivity extends ActionBarActivity {
 
 
 
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Global info stuff.
+
 
         //Setup the intent to call the activity selection screen.
 
