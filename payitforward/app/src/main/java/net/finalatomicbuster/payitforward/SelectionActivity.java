@@ -1,11 +1,13 @@
 package net.finalatomicbuster.payitforward;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 
 
@@ -15,11 +17,22 @@ public class SelectionActivity extends ActionBarActivity {
     Boolean donationOption1 = true;
     Boolean donationOption2 = false;
     Boolean donationOption3 = false;
+    Integer donationOptionChosen = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
+
+        //Handle our button to donate.
+        Button buttonDonate = (Button)findViewById(R.id.button_donate);
+
+        buttonDonate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callInfoActivity();
+            }
+        });
     }
 
 
@@ -79,6 +92,7 @@ public class SelectionActivity extends ActionBarActivity {
                 donationOption1 = true;
                 donationOption2 = false;
                 donationOption3 = false;
+                donationOptionChosen = 1;
                 Log.v("SelectionActivity:","true, false, false");
                 break;
 
@@ -86,6 +100,7 @@ public class SelectionActivity extends ActionBarActivity {
                 donationOption1 = false;
                 donationOption2 = true;
                 donationOption3 = false;
+                donationOptionChosen = 2;
                 Log.v("SelectionActivity:","false, true, false");
                 break;
 
@@ -93,10 +108,26 @@ public class SelectionActivity extends ActionBarActivity {
                 donationOption1 = false;
                 donationOption2 = false;
                 donationOption3 = true;
+                donationOptionChosen = 3;
                 Log.v("SelectionActivity:","false, false, true");
                 break;
 
         }
 
     }
+
+    void callInfoActivity(){
+
+        //Define the intent that will call the InfoActivity.
+        Intent infoIntent = new Intent(this, InfoActivity.class);
+
+        //Add some data to our intent to pass to the next activity.
+        infoIntent.putExtra("OptionSelected", Integer.toString(donationOptionChosen));
+        Log.v("SelectionActivity Chosen and added to intent:", Integer.toString(donationOptionChosen));
+
+        //Lets now start the activity that I made above.
+        startActivity(infoIntent);
+
+    }
+
 }
