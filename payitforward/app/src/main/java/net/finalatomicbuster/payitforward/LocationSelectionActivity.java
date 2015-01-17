@@ -7,6 +7,8 @@ import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -24,12 +26,24 @@ public class LocationSelectionActivity extends FragmentActivity {
     Boolean initialPlacementOfMarker = false;
     Marker deliveryMarker;
 
+    Button deliverButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_selection);
         setUpMapIfNeeded();
+
+
+        //Setup some button stuff.
+        Button deliverButton = (Button)findViewById(R.id.buttonDeliver);
+
+        deliverButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callActivitySummary();
+            }
+        });
     }
 
     @Override
@@ -107,11 +121,25 @@ public class LocationSelectionActivity extends FragmentActivity {
     }
 
     void placeInitialMarker(LatLng markerLocation){
+        //Take notice of the logic to stop this thing from happening over and over!
         if(initialPlacementOfMarker == false){
             deliveryMarker = mMap.addMarker(new MarkerOptions().position(markerLocation).draggable(true));
             initialPlacementOfMarker = true;
         }
 
+
+    }
+
+    void callActivitySummary(){
+        //First lets save the location of our pin.
+        saveLocationData();
+
+        //Then lets setup some intent stuff so that we can call our final screen.
+
+
+    }
+
+    void saveLocationData(){
 
     }
 
