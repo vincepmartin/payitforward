@@ -35,8 +35,8 @@ public class SelectionActivity extends ActionBarActivity {
         });
 
         //Global info stuff.
-        Log.v("Global Data Test:SelectionActivity", GlobalStateData.getInstance().getNotes());
-        GlobalStateData.getInstance().setNotes("Doppelbanger");
+        //Log.v("Global Data Test:SelectionActivity", GlobalStateData.getInstance().getNotes());
+        //GlobalStateData.getInstance().setNotes("Doppelbanger");
 
     }
 
@@ -119,6 +119,8 @@ public class SelectionActivity extends ActionBarActivity {
 
         }
 
+        //Set the selected item into the GlobalStateData store.
+        //GlobalStateData.getInstance().setGiftOption(donationOptionChosen);
     }
 
     void callInfoActivity(){
