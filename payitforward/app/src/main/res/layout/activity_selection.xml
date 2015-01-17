@@ -16,4 +16,28 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="55dp" />
 
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:orientation="vertical"
+        android:checkedButton="@+id/radio_donation1">
+
+        <RadioButton android:id="@+id/radio_donation1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/string_donation1"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_donation2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/string_donation2"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_donation3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/string_donation3"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+
 </RelativeLayout>
