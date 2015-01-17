@@ -12,5 +12,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_location_selection">Choose A Location</string>
     <string name="deliverbuttonstring">Deliver</string>
+    <string name="title_activity_summary_screen">Summary</string>
 
 </resources>
