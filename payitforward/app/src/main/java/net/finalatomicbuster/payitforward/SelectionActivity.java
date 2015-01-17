@@ -179,7 +179,7 @@ public class SelectionActivity extends ActionBarActivity {
         }
 
         //Set the selected item into the GlobalStateData store.
-        //GlobalStateData.getInstance().setGiftOption(donationOptionChosen);
+        GlobalStateData.getInstance().setGiftOption(donationOptionChosen);
     }
 
     void callInfoActivity() {
@@ -188,10 +188,14 @@ public class SelectionActivity extends ActionBarActivity {
         Intent infoIntent = new Intent(this, InfoActivity.class);
 
         //Add some data to our intent to pass to the next activity.
-        infoIntent.putExtra("OptionSelected", Integer.toString(donationOptionChosen));
-        Log.v("SelectionActivity Chosen and added to intent:", Integer.toString(donationOptionChosen));
+        //infoIntent.putExtra("OptionSelected", Integer.toString(donationOptionChosen));
+        //Log.v("SelectionActivity Chosen and added to intent:", Integer.toString(donationOptionChosen));
 
         //Lets now start the activity that I made above.
+
+        //Save the information that we put in.
+
+
         startActivity(infoIntent);
 
     }
