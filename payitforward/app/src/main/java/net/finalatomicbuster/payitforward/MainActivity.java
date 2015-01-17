@@ -1,17 +1,40 @@
 package net.finalatomicbuster.payitforward;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.widget.Button;
+import android.util.Log;
 
 public class MainActivity extends ActionBarActivity {
 
+
+    //Define the variables for our buttons and intents.
+    Intent activitySelectionIntent;
+
+
+
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Setup the intent to call the activity selection screen.
+
+
+        //Setup our login button.
+        Button loginButton = (Button)findViewById(R.id.button_login);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callActivitySelection();
+            }
+        });
     }
 
 
@@ -35,5 +58,12 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void callActivitySelection(){
+        Log.v("MainActivity","Call Activity Selection");
+        activitySelectionIntent = new Intent(this,SelectionActivity.class);
+        startActivity(activitySelectionIntent);
+
     }
 }

@@ -45,4 +45,22 @@
         android:id="@+id/editTextNote"
         android:layout_centerVertical="true"
         android:layout_alignStart="@+id/editTextName" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Snap Photo"
+        android:id="@+id/buttonSnapPhoto"
+        android:layout_marginTop="54dp"
+        android:layout_below="@+id/editTextNote"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Location"
+        android:id="@+id/buttonSelectLocation"
+        android:layout_below="@+id/buttonSnapPhoto"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp" />
 </RelativeLayout>
