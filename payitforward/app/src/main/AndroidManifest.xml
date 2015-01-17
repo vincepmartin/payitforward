@@ -51,6 +51,10 @@
             android:name=".LocationSelectionActivity"
             android:label="@string/title_activity_location_selection" >
         </activity>
+        <activity
+            android:name=".SummaryScreen"
+            android:label="@string/title_activity_summary_screen" >
+        </activity>
     </application>
 
 </manifest>

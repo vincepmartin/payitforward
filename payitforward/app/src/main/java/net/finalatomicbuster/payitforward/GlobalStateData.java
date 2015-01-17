@@ -1,6 +1,7 @@
 package net.finalatomicbuster.payitforward;
 
 import android.app.Application;
+import android.util.Log;
 
 /**
  * Created by vmartin on 1/17/15.
@@ -12,6 +13,8 @@ public class GlobalStateData {
     public Integer giftOption;
     public String QRCode;
     public String notesOnDelivery;
+    public Double longitude;
+    public Double latitude;
 
 
     public static GlobalStateData getInstance() {
@@ -22,8 +25,11 @@ public class GlobalStateData {
     //Setters and getters...
 
     //locationOfDelivery___
-    public void setLocation(String value){
-        locationOfDelivery = value;
+    public void setLocation(Double valueLongitude, Double valueLatitude){
+        longitude = valueLongitude;
+        latitude = valueLatitude;
+
+        createLocationString();
     };
 
     public String getLocation() {
@@ -58,6 +64,10 @@ public class GlobalStateData {
 
     }
 
+    private void createLocationString(){
+        locationOfDelivery = longitude.toString() + "," + latitude.toString();
+        Log.v("Location of Delivery String:", locationOfDelivery);
+    }
 
     private GlobalStateData() {
 
