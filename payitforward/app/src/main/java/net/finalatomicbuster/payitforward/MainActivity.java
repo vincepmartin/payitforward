@@ -26,6 +26,8 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         //Global info stuff.
+        GlobalStateData.getInstance().setNotes("Super Derp");
+        Log.v("Global Data Test:MainActivity", "Super Derp");
 
 
         //Setup the intent to call the activity selection screen.

@@ -38,6 +38,9 @@ public class InfoActivity extends ActionBarActivity {
 
         });
 
+        //Global info stuff.
+        Log.v("Global Data Test:InfoActivity", GlobalStateData.getInstance().getNotes());
+
 
     }
 

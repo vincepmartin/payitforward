@@ -33,6 +33,11 @@ public class SelectionActivity extends ActionBarActivity {
                 callInfoActivity();
             }
         });
+
+        //Global info stuff.
+        Log.v("Global Data Test:SelectionActivity", GlobalStateData.getInstance().getNotes());
+        GlobalStateData.getInstance().setNotes("Doppelbanger");
+
     }
 
 
