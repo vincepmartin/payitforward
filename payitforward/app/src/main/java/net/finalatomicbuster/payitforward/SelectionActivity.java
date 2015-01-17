@@ -86,6 +86,17 @@ public class SelectionActivity extends ActionBarActivity {
 
         System.out.println(fee);
 
+        float cost = (float) fee / 100;
+
+        RadioButton low = (RadioButton) findViewById(R.id.radio_donation1);
+        RadioButton mid = (RadioButton) findViewById(R.id.radio_donation2);
+        RadioButton high = (RadioButton) findViewById(R.id.radio_donation3);
+
+        low.setText(String.format("Basic: %.2f", (cost + 5.0)));
+        mid.setText(String.format("Giver: %.2f", (cost + 10.0)));
+        high.setText(String.format("Giver: %.2f", (cost + 15.0)));
+
+
     }
 
 
