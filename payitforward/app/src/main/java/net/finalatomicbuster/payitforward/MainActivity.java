@@ -14,6 +14,7 @@ public class MainActivity extends ActionBarActivity {
 
     //Define the variables for our buttons and intents.
     Intent activitySelectionIntent;
+    Intent activityLocationSelectionIntent;
 
 
 
@@ -35,6 +36,7 @@ public class MainActivity extends ActionBarActivity {
                 callActivitySelection();
             }
         });
+
     }
 
 
@@ -66,4 +68,6 @@ public class MainActivity extends ActionBarActivity {
         startActivity(activitySelectionIntent);
 
     }
+
+
 }

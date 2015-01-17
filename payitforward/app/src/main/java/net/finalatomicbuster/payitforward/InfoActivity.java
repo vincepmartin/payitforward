@@ -1,17 +1,44 @@
 package net.finalatomicbuster.payitforward;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class InfoActivity extends ActionBarActivity {
+
+    //Define the intents used.
+    Intent activityLocationSelector;
+    Intent activityTakePicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
+
+
+        //Define the information for our buttons.
+
+        //Setup our picture button.
+        Button pictureButton = (Button)findViewById(R.id.buttonSnapPhoto);
+
+        //Setup our location button.
+        Button locationButton = (Button)findViewById(R.id.buttonSelectLocation);
+
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callLocationSelector();
+            }
+
+        });
+
+
     }
 
 
@@ -36,4 +63,11 @@ public class InfoActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    void callLocationSelector(){
+        Log.v("InfoActivity:", "Call Location Selection");
+        activityLocationSelector = new Intent(this,LocationSelectionActivity.class);
+        startActivity(activityLocationSelector);
+    }
+
 }
