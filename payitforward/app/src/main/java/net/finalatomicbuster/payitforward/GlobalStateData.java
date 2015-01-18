@@ -10,7 +10,7 @@ public class GlobalStateData {
     private static GlobalStateData ourInstance = new GlobalStateData();
 
     public String locationOfDelivery;
-    public Integer giftOption;
+    public String giftOption;
     public String QRCode;
     public String notesOnDelivery;
     public Double longitude;
@@ -38,11 +38,11 @@ public class GlobalStateData {
     }
 
     //giftOption___
-    public void setGiftOption(Integer value){
+    public void setGiftOption(String value){
         giftOption = value;
     }
 
-    public Integer getGiftOption(){
+    public String getGiftOption(){
         return this.giftOption;
     }
 

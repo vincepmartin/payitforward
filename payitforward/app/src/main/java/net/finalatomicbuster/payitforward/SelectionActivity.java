@@ -179,7 +179,7 @@ public class SelectionActivity extends ActionBarActivity {
         }
 
         //Set the selected item into the GlobalStateData store.
-        GlobalStateData.getInstance().setGiftOption(donationOptionChosen);
+        GlobalStateData.getInstance().setGiftOption(String.valueOf(donationOptionChosen));
     }
 
     void callInfoActivity() {
