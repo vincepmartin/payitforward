@@ -38,15 +38,16 @@ public class SummaryScreen extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("started");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary_screen);
 
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+//        StrictMode.setThreadPolicy(policy);
 
         //Put stuff on the screen.
         grabData();
-        postData();
+//        postData();
         //setNotification();
         putConfirmOnScreen();
     }
@@ -103,7 +104,7 @@ public class SummaryScreen extends ActionBarActivity {
         noteInfo = GlobalStateData.getInstance().getNotes();
 
         HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost("http://helpinghand.me/postmates/getquote/");
+        HttpPost httppost = new HttpPost("http://helpinghand.me/postmates/placeorder/");
 
         // Add your data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
