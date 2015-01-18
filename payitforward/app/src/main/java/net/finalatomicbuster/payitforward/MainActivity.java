@@ -2,8 +2,12 @@ package net.finalatomicbuster.payitforward;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,6 +26,20 @@ import com.getpebble.android.kit.PebbleKit;
 import com.getpebble.android.kit.PebbleKit.PebbleDataReceiver;
 import com.getpebble.android.kit.util.PebbleDictionary;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class MainActivity extends ActionBarActivity {
@@ -63,7 +81,8 @@ public class MainActivity extends ActionBarActivity {
                         .build()
         );
 
-
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         //TEST Global info stuff. TEST
         //GlobalStateData.getInstance().setNotes("Super Derp");
         //Log.v("Global Data Test:MainActivity", "Super Derp");
@@ -211,8 +230,76 @@ public class MainActivity extends ActionBarActivity {
         //Enable the pebble.
         GlobalStateData.getInstance().setPebbleEnabled(true);
 
-        Intent pebbleIntent = new Intent(this,SelectionActivity.class);
-        startActivity(pebbleIntent);
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
 
-    }
+        //Set stuff
+        GlobalStateData.getInstance().setQRCode("54bba612f153b30c001cbbba");
+        GlobalStateData.getInstance().setNotes("You Just helped your Favorite Person!");
+        //GlobalStateData.getInstance().setLocation(location.getLongitude(), location.getLatitude());
+
+        String qrCode = "54bba612f153b30c001cbbba";
+
+
+
+        String provider = locationManager.getBestProvider(criteria, false);
+        Location location = locationManager.getLastKnownLocation(provider);
+        System.out.println("Posting");
+        System.out.println("QR");
+       // String qrCode = GlobalStateData.getInstance().getQRCode();
+        System.out.println(qrCode);
+        System.out.println("gift");
+        String giftOption = GlobalStateData.getInstance().getGiftOption();
+        System.out.println(giftOption);
+        System.out.println("location");
+//        String locationCoords = GlobalStateData.getInstance().getLocation();
+        System.out.println(String.valueOf(location.getLatitude()) + ","
+                + String.valueOf(location.getLongitude()));
+        System.out.println("notes");
+        String noteInfo = " ";
+        System.out.println("got data");
+
+        System.out.println(giftOption);
+
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost("http://helpinghand.me/postmates/placeorder/");
+
+        System.out.println("made client");
+        // Add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("loc", String.valueOf(location.getLatitude()) + ","
+                + String.valueOf(location.getLongitude())));
+        nameValuePairs.add(new BasicNameValuePair("gift", giftOption));
+        nameValuePairs.add(new BasicNameValuePair("paid", "paid"));
+        nameValuePairs.add(new BasicNameValuePair("id", qrCode));
+        nameValuePairs.add(new BasicNameValuePair("note", noteInfo));
+        System.out.println("set data");
+
+
+        try {
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            System.out.println("in try");
+            // Execute HTTP Post Request
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            String responseString = EntityUtils.toString(entity, "UTF-8");
+            System.out.println(responseString);
+            GlobalStateData.getInstance().setOrderID(responseString);
+            System.out.println("Posted");
+
+            Intent pebbleIntent = new Intent(this,SummaryScreen.class);
+            startActivity(pebbleIntent);
+
+
+        } catch (ClientProtocolException e) {
+            return;
+        } catch (IOException e) {
+            return;
+        }
+    };
+
+
+
+
 }

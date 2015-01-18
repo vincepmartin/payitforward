@@ -113,8 +113,10 @@ public class SelectionActivity extends ActionBarActivity {
         if(pebbleEnabled)
         {
             //Lets set some default settings.
-            GlobalStateData.getInstance().setQRCode("54bb64fcdc26cc0c00571e61");
+            GlobalStateData.getInstance().setQRCode("54bba612f153b30c001cbbba");
             GlobalStateData.getInstance().setNotes("You Just helped your Favorite Person!");
+            GlobalStateData.getInstance().setLocation(location.getLongitude(), location.getLatitude());
+
 
             //Intent to summary.
             Intent summaryIntent = new Intent(this, SummaryScreen.class);
