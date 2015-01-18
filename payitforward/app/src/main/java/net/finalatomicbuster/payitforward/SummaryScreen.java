@@ -4,14 +4,30 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class SummaryScreen extends ActionBarActivity {
+
+    String qrCode;
+    String giftChoice;
+    String locationCoords;
+    String noteInfo;
+
+    TextView qrCodeTextView;
+    TextView giftChoiceTextView;
+    TextView locationCoordsTextView;
+    TextView noteInfoTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary_screen);
+
+        //Put stuff on the screen.
+        grabData();
+        putDataOnScreen();
     }
 
 
@@ -35,5 +51,25 @@ public class SummaryScreen extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    void grabData(){
+        qrCode = GlobalStateData.getInstance().getQRCode();
+        giftChoice = GlobalStateData.getInstance().getGiftOption().toString();
+        locationCoords = GlobalStateData.getInstance().getLocation();
+        noteInfo = GlobalStateData.getInstance().getNotes();
+    }
+
+    void putDataOnScreen(){
+        qrCodeTextView = (TextView) findViewById(R.id.textViewQR);
+        giftChoiceTextView = (TextView) findViewById(R.id.textViewGiftChoice);
+        locationCoordsTextView = (TextView) findViewById(R.id.textViewLocation);
+        noteInfoTextView = (TextView) findViewById(R.id.textViewNote);
+
+
+        qrCodeTextView.setText(qrCode);
+        giftChoiceTextView.setText(giftChoice);
+        locationCoordsTextView.setText(locationCoords);
+        noteInfoTextView.setText(noteInfo);
     }
 }

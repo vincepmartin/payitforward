@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 public class InfoActivity extends ActionBarActivity {
@@ -15,6 +16,14 @@ public class InfoActivity extends ActionBarActivity {
     //Define the intents used.
     Intent activityLocationSelector;
     Intent activityTakePicture;
+
+    //Stuff for the edit text boxes...
+    EditText noteText;
+    String noteTextString;
+
+    EditText qrText;
+    String qrTextString;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +75,25 @@ public class InfoActivity extends ActionBarActivity {
 
     void callLocationSelector(){
         Log.v("InfoActivity:", "Call Location Selection");
+
+        //Save the information
+        noteText = (EditText) findViewById(R.id.editTextNote);
+        noteTextString = noteText.getText().toString();
+        Log.v("InfoActivity: noteTextString Value:",noteTextString);
+
+        qrText = (EditText) findViewById(R.id.editTextQR);
+        qrTextString = qrText.getText().toString();
+        Log.v("InfoActivity: qrTextString Value:",qrTextString);
+
+
+
+        GlobalStateData.getInstance().setQRCode(qrTextString);
+        GlobalStateData.getInstance().setNotes(noteTextString);
+
         activityLocationSelector = new Intent(this,LocationSelectionActivity.class);
         startActivity(activityLocationSelector);
     }
+
+
 
 }

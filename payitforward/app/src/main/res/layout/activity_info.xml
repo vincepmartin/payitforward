@@ -10,8 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Name"
-        android:id="@+id/textViewName"
+        android:text="QR"
+        android:id="@+id/textViewQR"
         android:layout_marginTop="63dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -20,10 +20,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="QR Code"
         android:ems="10"
-        android:id="@+id/editTextName"
-        android:layout_below="@+id/textViewName"
+        android:id="@+id/editTextQR"
+        android:layout_below="@+id/textViewQR"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -44,7 +44,7 @@
         android:ems="10"
         android:id="@+id/editTextNote"
         android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/editTextName" />
+        android:layout_alignStart="@+id/editTextQR" />
 
     <Button
         android:layout_width="wrap_content"
