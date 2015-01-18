@@ -26,7 +26,7 @@ import java.util.List;
 public class SummaryScreen extends ActionBarActivity {
 
     String qrCode;
-    String giftChoice;
+    Integer giftChoice;
     String locationCoords;
     String noteInfo;
 
@@ -47,9 +47,9 @@ public class SummaryScreen extends ActionBarActivity {
 
         //Put stuff on the screen.
         grabData();
-//        postData();
+        //postData();
         //setNotification();
-        putConfirmOnScreen();
+        //putConfirmOnScreen();
     }
 
 
@@ -76,9 +76,13 @@ public class SummaryScreen extends ActionBarActivity {
     }
 
     void grabData(){
+        System.out.println("QR");
         qrCode = GlobalStateData.getInstance().getQRCode();
-        giftChoice = GlobalStateData.getInstance().getGiftOption().toString();
+        System.out.println("gift");
+        giftChoice = GlobalStateData.getInstance().getGiftOption();
+        System.out.println("location");
         locationCoords = GlobalStateData.getInstance().getLocation();
+        System.out.println("notes");
         noteInfo = GlobalStateData.getInstance().getNotes();
     }
 
@@ -99,7 +103,7 @@ public class SummaryScreen extends ActionBarActivity {
 
         System.out.println("Posting");
         qrCode = GlobalStateData.getInstance().getQRCode();
-        giftChoice = GlobalStateData.getInstance().getGiftOption().toString();
+        giftChoice = GlobalStateData.getInstance().getGiftOption();
         locationCoords = GlobalStateData.getInstance().getLocation();
         noteInfo = GlobalStateData.getInstance().getNotes();
 
@@ -109,7 +113,7 @@ public class SummaryScreen extends ActionBarActivity {
         // Add your data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
         nameValuePairs.add(new BasicNameValuePair("loc", locationCoords));
-        nameValuePairs.add(new BasicNameValuePair("gift", giftChoice));
+        nameValuePairs.add(new BasicNameValuePair("gift", giftChoice.toString()));
         nameValuePairs.add(new BasicNameValuePair("paid", "paid"));
         nameValuePairs.add(new BasicNameValuePair("id", qrCode));
         nameValuePairs.add(new BasicNameValuePair("note", noteInfo));
