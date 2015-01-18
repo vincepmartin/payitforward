@@ -28,11 +28,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Full Name"
         android:ems="10"
         android:id="@+id/editTextCreditCardName"
         android:layout_alignTop="@+id/editText"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:hint="Full Name" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -40,9 +40,9 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/editTextCreditCardNumber"
-        android:text="Credit Card #"
-        android:layout_below="@+id/editTextCreditCardSecurityNumber"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/editText"
+        android:layout_alignStart="@+id/editTextCreditCardName"
+        android:hint="Credit Card #" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -50,9 +50,9 @@
         android:inputType="date"
         android:ems="10"
         android:id="@+id/editTextCreditCardExperationDate"
-        android:text="Expiration Date"
         android:layout_below="@+id/editTextCreditCardNumber"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:hint="Expiration Date" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -60,9 +60,9 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/editTextCreditCardSecurityNumber"
-        android:text="Security #"
-        android:layout_below="@+id/editTextCreditCardName"
-        android:layout_centerHorizontal="true" />
+        android:hint="Security #"
+        android:layout_below="@+id/editTextCreditCardExperationDate"
+        android:layout_alignStart="@+id/editTextCreditCardExperationDate" />
 
     <Button
         android:layout_width="wrap_content"

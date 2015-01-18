@@ -14,7 +14,7 @@ public class MainActivity extends ActionBarActivity {
 
     //Define the variables for our buttons and intents.
     Intent activitySelectionIntent;
-    Intent activityLocationSelectionIntent;
+    Intent activitySettingsIntent;
 
 
 
@@ -59,6 +59,13 @@ public class MainActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        switch (id){
+            case R.id.action_settings:
+                activitySettingsIntent= new Intent(this,SettingsActivity.class);
+                startActivity(activitySettingsIntent);
+
+        }
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
