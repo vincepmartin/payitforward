@@ -1,5 +1,6 @@
 package net.finalatomicbuster.payitforward;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -9,6 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class InfoActivity extends ActionBarActivity {
@@ -29,6 +33,13 @@ public class InfoActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath("fonts/comic-neue.ttf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
+
 
 
         //Define the information for our buttons.
@@ -95,5 +106,8 @@ public class InfoActivity extends ActionBarActivity {
     }
 
 
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 }

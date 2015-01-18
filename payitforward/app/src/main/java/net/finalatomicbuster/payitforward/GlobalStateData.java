@@ -66,7 +66,7 @@ public class GlobalStateData {
     }
 
     private void createLocationString(){
-        locationOfDelivery = longitude.toString() + "," + latitude.toString();
+        locationOfDelivery = latitude.toString()+","+longitude.toString() ;
         Log.v("Location of Delivery String:", locationOfDelivery);
     }
 

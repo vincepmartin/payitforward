@@ -1,5 +1,6 @@
 package net.finalatomicbuster.payitforward;
 
+import android.content.Context;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -22,6 +23,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 
 public class SummaryScreen extends ActionBarActivity {
 
@@ -41,6 +45,12 @@ public class SummaryScreen extends ActionBarActivity {
         System.out.println("started");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary_screen);
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath("fonts/comic-neue.ttf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
 
 //        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 //        StrictMode.setThreadPolicy(policy);
@@ -108,6 +118,7 @@ public class SummaryScreen extends ActionBarActivity {
         giftOption = GlobalStateData.getInstance().getGiftOption();
         System.out.println("location");
         locationCoords = GlobalStateData.getInstance().getLocation();
+        System.out.println(locationCoords);
         System.out.println("notes");
         noteInfo = GlobalStateData.getInstance().getNotes();
         System.out.println("got data");
@@ -147,4 +158,8 @@ public class SummaryScreen extends ActionBarActivity {
         }
     };
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 }

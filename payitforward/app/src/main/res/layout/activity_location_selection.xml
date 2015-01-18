@@ -13,6 +13,7 @@
         android:layout_alignEnd="@+id/buttonDeliver" />
 
     <Button
+        fontPath="fonts/comic-neue.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/deliverbuttonstring"
