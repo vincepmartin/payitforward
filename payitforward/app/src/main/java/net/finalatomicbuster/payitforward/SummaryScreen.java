@@ -34,6 +34,10 @@ public class SummaryScreen extends ActionBarActivity {
     String locationCoords;
     String noteInfo;
 
+    String status;
+    String fee;
+    String courier = "Robo";
+
     TextView qrCodeTextView;
     TextView giftChoiceTextView;
     TextView locationCoordsTextView;
@@ -58,6 +62,7 @@ public class SummaryScreen extends ActionBarActivity {
         //Put stuff on the screen.
         grabData();
         updateData();
+//        updateScreen();
 //        postData();
         //setNotification();
         putConfirmOnScreen();
@@ -98,9 +103,9 @@ public class SummaryScreen extends ActionBarActivity {
     }
 
     void putConfirmOnScreen(){
-        qrCodeTextView = (TextView) findViewById(R.id.textViewQR);
-        giftChoiceTextView = (TextView) findViewById(R.id.textViewGiftChoice);
-        locationCoordsTextView = (TextView) findViewById(R.id.textViewLocation);
+//        qrCodeTextView = (TextView) findViewById(R.id.textViewQR);
+//        giftChoiceTextView = (TextView) findViewById(R.id.textViewGiftChoice);
+//        locationCoordsTextView = (TextView) findViewById(R.id.textViewLocation);
         noteInfoTextView = (TextView) findViewById(R.id.textViewNote);
 
 
@@ -173,8 +178,10 @@ public class SummaryScreen extends ActionBarActivity {
             // Execute HTTP Post Request
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
-            String responseString = EntityUtils.toString(entity, "UTF-8");
+            String[] responseString = EntityUtils.toString(entity, "UTF-8").split(";");
             System.out.println(responseString);
+
+
             return;
 
         } catch (ClientProtocolException e) {
