@@ -15,6 +15,7 @@ public class GlobalStateData {
     public String notesOnDelivery;
     public Double longitude;
     public Double latitude;
+    public String orderID;
 
 
     public static GlobalStateData getInstance() {
@@ -67,6 +68,14 @@ public class GlobalStateData {
     private void createLocationString(){
         locationOfDelivery = longitude.toString() + "," + latitude.toString();
         Log.v("Location of Delivery String:", locationOfDelivery);
+    }
+
+    public void setOrderID(String value){
+        orderID = value;
+    }
+
+    public String getOrderID(){
+        return this.orderID;
     }
 
     private GlobalStateData() {

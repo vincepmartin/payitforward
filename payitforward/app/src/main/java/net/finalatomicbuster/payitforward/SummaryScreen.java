@@ -1,10 +1,26 @@
 package net.finalatomicbuster.payitforward;
 
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SummaryScreen extends ActionBarActivity {
@@ -25,9 +41,12 @@ public class SummaryScreen extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary_screen);
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         //Put stuff on the screen.
         grabData();
-        //postData();
+        postData();
         //setNotification();
         putConfirmOnScreen();
     }
@@ -74,4 +93,44 @@ public class SummaryScreen extends ActionBarActivity {
         locationCoordsTextView.setText(locationCoords);
         noteInfoTextView.setText(noteInfo);
     }
+
+    void postData(){
+
+        System.out.println("Posting");
+        qrCode = GlobalStateData.getInstance().getQRCode();
+        giftChoice = GlobalStateData.getInstance().getGiftOption().toString();
+        locationCoords = GlobalStateData.getInstance().getLocation();
+        noteInfo = GlobalStateData.getInstance().getNotes();
+
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost("http://helpinghand.me/postmates/getquote/");
+
+        // Add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("loc", locationCoords));
+        nameValuePairs.add(new BasicNameValuePair("gift", giftChoice));
+        nameValuePairs.add(new BasicNameValuePair("paid", "paid"));
+        nameValuePairs.add(new BasicNameValuePair("id", qrCode));
+        nameValuePairs.add(new BasicNameValuePair("note", noteInfo));
+
+
+        try {
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            System.out.println("in try");
+            // Execute HTTP Post Request
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            String responseString = EntityUtils.toString(entity, "UTF-8");
+            System.out.println(responseString);
+            GlobalStateData.getInstance().setOrderID(responseString);
+            System.out.println("Posted");
+            return;
+
+        } catch (ClientProtocolException e) {
+            return;
+        } catch (IOException e) {
+            return;
+        }
+    };
+
 }
