@@ -25,8 +25,8 @@ public class InfoActivity extends ActionBarActivity {
     EditText noteText;
     String noteTextString;
 
-    EditText qrText;
-    String qrTextString;
+//    EditText qrText;
+//    String qrTextString;
 
 
     @Override
@@ -92,13 +92,13 @@ public class InfoActivity extends ActionBarActivity {
         noteTextString = noteText.getText().toString();
         Log.v("InfoActivity: noteTextString Value:",noteTextString);
 
-        qrText = (EditText) findViewById(R.id.editTextQR);
-        qrTextString = qrText.getText().toString();
-        Log.v("InfoActivity: qrTextString Value:",qrTextString);
+//        qrText = (EditText) findViewById(R.id.editTextQR);
+//        qrTextString = qrText.getText().toString();
+//        Log.v("InfoActivity: qrTextString Value:",qrTextString);
 
 
 
-        GlobalStateData.getInstance().setQRCode(qrTextString);
+//        GlobalStateData.getInstance().setQRCode(qrTextString);
         GlobalStateData.getInstance().setNotes(noteTextString);
 
         activityLocationSelector = new Intent(this,LocationSelectionActivity.class);
