@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -18,6 +19,21 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -29,6 +45,16 @@ public class LocationSelectionActivity extends FragmentActivity {
     Boolean initialPlacementOfMarker = false;
     Marker deliveryMarker;
     LatLng tempLocation;
+    String qrCode;
+    String giftOption;
+    String locationCoords;
+    String noteInfo;
+
+    TextView qrCodeTextView;
+    TextView giftChoiceTextView;
+    TextView locationCoordsTextView;
+    TextView noteInfoTextView;
+
 
 
     Button deliverButton;
@@ -157,6 +183,7 @@ public class LocationSelectionActivity extends FragmentActivity {
         GlobalStateData.getInstance().setLocation(tempLocation.longitude, tempLocation.latitude);
 
         //Jump to the final activity.
+        postData();
         Intent summaryScreenIntent = new Intent(this,SummaryScreen.class);
         startActivity(summaryScreenIntent);
 
@@ -166,5 +193,54 @@ public class LocationSelectionActivity extends FragmentActivity {
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
+
+    void postData(){
+
+        System.out.println("Posting");
+        System.out.println("QR");
+        qrCode = GlobalStateData.getInstance().getQRCode();
+        System.out.println("gift");
+        giftOption = GlobalStateData.getInstance().getGiftOption();
+        System.out.println("location");
+        locationCoords = GlobalStateData.getInstance().getLocation();
+        System.out.println(locationCoords);
+        System.out.println("notes");
+        noteInfo = GlobalStateData.getInstance().getNotes();
+        System.out.println("got data");
+
+        System.out.println(giftOption);
+
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost("http://helpinghand.me/postmates/placeorder/");
+
+        System.out.println("made client");
+        // Add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("loc", locationCoords));
+        nameValuePairs.add(new BasicNameValuePair("gift", giftOption));
+        nameValuePairs.add(new BasicNameValuePair("paid", "paid"));
+        nameValuePairs.add(new BasicNameValuePair("id", qrCode));
+        nameValuePairs.add(new BasicNameValuePair("note", noteInfo));
+        System.out.println("set data");
+
+
+        try {
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            System.out.println("in try");
+            // Execute HTTP Post Request
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            String responseString = EntityUtils.toString(entity, "UTF-8");
+            System.out.println(responseString);
+            GlobalStateData.getInstance().setOrderID(responseString);
+            System.out.println("Posted");
+            return;
+
+        } catch (ClientProtocolException e) {
+            return;
+        } catch (IOException e) {
+            return;
+        }
+    };
 
 }

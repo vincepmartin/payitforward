@@ -57,7 +57,8 @@ public class SummaryScreen extends ActionBarActivity {
 
         //Put stuff on the screen.
         grabData();
-        postData();
+        updateData();
+//        postData();
         //setNotification();
         //putConfirmOnScreen();
     }
@@ -109,46 +110,71 @@ public class SummaryScreen extends ActionBarActivity {
         noteInfoTextView.setText(noteInfo);
     }
 
-    void postData(){
+//    void post(){
+//
+//        System.out.println("Posting");
+//        System.out.println("QR");
+//        qrCode = GlobalStateData.getInstance().getQRCode();
+//        System.out.println("gift");
+//        giftOption = GlobalStateData.getInstance().getGiftOption();
+//        System.out.println("location");
+//        locationCoords = GlobalStateData.getInstance().getLocation();
+//        System.out.println(locationCoords);
+//        System.out.println("notes");
+//        noteInfo = GlobalStateData.getInstance().getNotes();
+//        System.out.println("got data");
+//
+//        System.out.println(giftOption);
+//
+//        HttpClient httpclient = new DefaultHttpClient();
+//        HttpPost httppost = new HttpPost("http://helpinghand.me/postmates/placeorder/");
+//
+//        System.out.println("made client");
+//        // Add your data
+//        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+//        nameValuePairs.add(new BasicNameValuePair("loc", locationCoords));
+//        nameValuePairs.add(new BasicNameValuePair("gift", giftOption));
+//        nameValuePairs.add(new BasicNameValuePair("paid", "paid"));
+//        nameValuePairs.add(new BasicNameValuePair("id", qrCode));
+//        nameValuePairs.add(new BasicNameValuePair("note", noteInfo));
+//        System.out.println("set data");
+//
+//
+//        try {
+//            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+//            System.out.println("in try");
+//            // Execute HTTP Post Request
+//            HttpResponse response = httpclient.execute(httppost);
+//            HttpEntity entity = response.getEntity();
+//            String responseString = EntityUtils.toString(entity, "UTF-8");
+//            System.out.println(responseString);
+//            GlobalStateData.getInstance().setOrderID(responseString);
+//            System.out.println("Posted");
+//            return;
+//
+//        } catch (ClientProtocolException e) {
+//            return;
+//        } catch (IOException e) {
+//            return;
+//        }
+//    };
 
-        System.out.println("Posting");
-        System.out.println("QR");
-        qrCode = GlobalStateData.getInstance().getQRCode();
-        System.out.println("gift");
-        giftOption = GlobalStateData.getInstance().getGiftOption();
-        System.out.println("location");
-        locationCoords = GlobalStateData.getInstance().getLocation();
-        System.out.println(locationCoords);
-        System.out.println("notes");
-        noteInfo = GlobalStateData.getInstance().getNotes();
-        System.out.println("got data");
-
-        System.out.println(giftOption);
+    public void updateData(){
 
         HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost("http://helpinghand.me/postmates/placeorder/");
+        HttpPost httppost = new HttpPost("http://helpinghand.me/postmates/checkstatus/");
 
-        System.out.println("made client");
-        // Add your data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-        nameValuePairs.add(new BasicNameValuePair("loc", locationCoords));
-        nameValuePairs.add(new BasicNameValuePair("gift", giftOption));
-        nameValuePairs.add(new BasicNameValuePair("paid", "paid"));
-        nameValuePairs.add(new BasicNameValuePair("id", qrCode));
-        nameValuePairs.add(new BasicNameValuePair("note", noteInfo));
-        System.out.println("set data");
-
+        nameValuePairs.add(new BasicNameValuePair("id",GlobalStateData.getInstance().getOrderID()));
 
         try {
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            System.out.println("in try");
+
             // Execute HTTP Post Request
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
             String responseString = EntityUtils.toString(entity, "UTF-8");
             System.out.println(responseString);
-            GlobalStateData.getInstance().setOrderID(responseString);
-            System.out.println("Posted");
             return;
 
         } catch (ClientProtocolException e) {
@@ -156,7 +182,8 @@ public class SummaryScreen extends ActionBarActivity {
         } catch (IOException e) {
             return;
         }
-    };
+
+    }
 
     @Override
     protected void attachBaseContext(Context newBase) {
