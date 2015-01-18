@@ -13,7 +13,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Your gift is en route!"
+        android:text="Thank you for lending a helping hand!"
         android:id="@+id/confirm_title"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
@@ -23,6 +23,53 @@
         android:paddingBottom="20dp"
         android:textColor="#01160F"/>
 
+    <TextView android:id="@+id/status"
+        android:layout_below="@id/confirm_title"
+        android:paddingTop="30dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="Status: "
+        android:textSize="25sp"
+        fontPath="fonts/comic-neue.ttf"
+        android:textColor="#01160F"
+    />
+
+    <TextView android:id="@+id/fee"
+        android:layout_below="@id/status"
+        android:paddingTop="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="Fee: "
+        android:textSize="25sp"
+        fontPath="fonts/comic-neue.ttf"
+        android:textColor="#01160F"
+        />
+
+    <TextView android:id="@+id/notes"
+        android:layout_below="@id/fee"
+        android:paddingTop="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="Notes: "
+        android:textSize="25sp"
+        fontPath="fonts/comic-neue.ttf"
+        android:textColor="#01160F"
+        />
+
+    <Button android:id="@+id/refresh"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_below="@id/notes"
+        android:text="Refresh"
+        android:layout_alignParentBottom="true"
+        fontPath="fonts/comic-neue.ttf"
+        android:textColor="#01160F"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="130dp"
+        android:onClick="refresh"/>
 
 
 </RelativeLayout>

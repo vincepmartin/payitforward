@@ -233,6 +233,11 @@ public class MainActivity extends ActionBarActivity {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        String provider = locationManager.getBestProvider(criteria, false);
+        Location location = locationManager.getLastKnownLocation(provider);
+        GlobalStateData.getInstance().setLocation(location.getLongitude(),location.getLatitude());
+
+        String locationString = GlobalStateData.getInstance().getLocation();
 
         //Set stuff
         GlobalStateData.getInstance().setQRCode("54bba612f153b30c001cbbba");
@@ -242,9 +247,6 @@ public class MainActivity extends ActionBarActivity {
         String qrCode = "54bba612f153b30c001cbbba";
 
 
-
-        String provider = locationManager.getBestProvider(criteria, false);
-        Location location = locationManager.getLastKnownLocation(provider);
         System.out.println("Posting");
         System.out.println("QR");
        // String qrCode = GlobalStateData.getInstance().getQRCode();
@@ -254,8 +256,7 @@ public class MainActivity extends ActionBarActivity {
         System.out.println(giftOption);
         System.out.println("location");
 //        String locationCoords = GlobalStateData.getInstance().getLocation();
-        System.out.println(String.valueOf(location.getLatitude()) + ","
-                + String.valueOf(location.getLongitude()));
+        System.out.println(locationString);
         System.out.println("notes");
         String noteInfo = " ";
         System.out.println("got data");
@@ -268,8 +269,7 @@ public class MainActivity extends ActionBarActivity {
         System.out.println("made client");
         // Add your data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-        nameValuePairs.add(new BasicNameValuePair("loc", String.valueOf(location.getLatitude()) + ","
-                + String.valueOf(location.getLongitude())));
+        nameValuePairs.add(new BasicNameValuePair("loc", locationString));
         nameValuePairs.add(new BasicNameValuePair("gift", giftOption));
         nameValuePairs.add(new BasicNameValuePair("paid", "paid"));
         nameValuePairs.add(new BasicNameValuePair("id", qrCode));

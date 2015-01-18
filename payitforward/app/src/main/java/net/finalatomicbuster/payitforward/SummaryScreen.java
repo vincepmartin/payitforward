@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import org.apache.http.HttpEntity;
@@ -18,6 +19,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,16 +34,15 @@ public class SummaryScreen extends ActionBarActivity {
     String qrCode;
     String giftOption;
     String locationCoords;
-    String noteInfo;
+    String note;
 
     String status;
     String fee;
     String courier = "Robo";
 
-    TextView qrCodeTextView;
-    TextView giftChoiceTextView;
-    TextView locationCoordsTextView;
-    TextView noteInfoTextView;
+    TextView stat ;
+    TextView fees ;
+    TextView notes;
 
 
     @Override
@@ -55,17 +56,20 @@ public class SummaryScreen extends ActionBarActivity {
                         .setFontAttrId(R.attr.fontPath)
                         .build()
         );
-
 //        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 //        StrictMode.setThreadPolicy(policy);
 
         //Put stuff on the screen.
+
+        stat = (TextView) findViewById(R.id.status);
+        fees = (TextView) findViewById(R.id.fee);
+        notes = (TextView) findViewById(R.id.notes);
+
         grabData();
         updateData();
 //        updateScreen();
 //        postData();
         //setNotification();
-        putConfirmOnScreen();
     }
 
 
@@ -99,20 +103,20 @@ public class SummaryScreen extends ActionBarActivity {
         System.out.println("location");
         locationCoords = GlobalStateData.getInstance().getLocation();
         System.out.println("notes");
-        noteInfo = GlobalStateData.getInstance().getNotes();
+        note = GlobalStateData.getInstance().getNotes();
     }
 
     void putConfirmOnScreen(){
-//        qrCodeTextView = (TextView) findViewById(R.id.textViewQR);
-//        giftChoiceTextView = (TextView) findViewById(R.id.textViewGiftChoice);
-//        locationCoordsTextView = (TextView) findViewById(R.id.textViewLocation);
-        noteInfoTextView = (TextView) findViewById(R.id.textViewNote);
-
-
-        qrCodeTextView.setText(qrCode);
-        giftChoiceTextView.setText(giftOption);
-        locationCoordsTextView.setText(locationCoords);
-        noteInfoTextView.setText(noteInfo);
+////        qrCodeTextView = (TextView) findViewById(R.id.textViewQR);
+////        giftChoiceTextView = (TextView) findViewById(R.id.textViewGiftChoice);
+////        locationCoordsTextView = (TextView) findViewById(R.id.textViewLocation);
+//        noteInfoTextView = (TextView) findViewById(R.id.textViewNote);
+//
+//
+//        qrCodeTextView.setText(qrCode);
+//        giftChoiceTextView.setText(giftOption);
+//        locationCoordsTextView.setText(locationCoords);
+//        noteInfoTextView.setText(noteInfo);
     }
 
 //    void post(){
@@ -179,17 +183,38 @@ public class SummaryScreen extends ActionBarActivity {
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
             String[] responseString = EntityUtils.toString(entity, "UTF-8").split(";");
-            System.out.println(responseString);
+            status = responseString[0];
+            System.out.println(responseString[0]);
+            fee = String.format("$%.2f",Float.valueOf(responseString[1])/100 +
+                    Float.valueOf(GlobalStateData.getInstance().getGiftOption()) * 5);
+            System.out.println(responseString[1]);
+            courier = responseString[2];
+            System.out.println(responseString[2]);
 
+            note = GlobalStateData.getInstance().getNotes();
 
-            return;
+            setInfo();
 
         } catch (ClientProtocolException e) {
-            return;
+
         } catch (IOException e) {
-            return;
+
         }
 
+    }
+
+    public void setInfo(){
+        stat.setText("Status: "+status);
+
+        fees.setText("Fee: "+fee);
+
+        notes.setText("Notes: "+note);
+
+    }
+
+    public void refresh(View view){
+        grabData();
+        updateData();
     }
 
     @Override
