@@ -55,6 +55,10 @@
             android:name=".SummaryScreen"
             android:label="@string/title_activity_summary_screen" >
         </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
 </manifest>

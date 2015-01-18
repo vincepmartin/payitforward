@@ -13,5 +13,8 @@
     <string name="title_activity_location_selection">Choose A Location</string>
     <string name="deliverbuttonstring">Deliver</string>
     <string name="title_activity_summary_screen">Summary</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="billinginformationstring">Billing Information</string>
+    <string name="pebbleinformationstring">Pebble Inormation</string>
 
 </resources>
