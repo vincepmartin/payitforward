@@ -19,7 +19,6 @@ public class InfoActivity extends ActionBarActivity {
 
     //Define the intents used.
     Intent activityLocationSelector;
-    Intent activityTakePicture;
 
     //Stuff for the edit text boxes...
     EditText noteText;

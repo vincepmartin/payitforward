@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 
 import org.apache.http.HttpEntity;
@@ -50,6 +51,14 @@ public class SelectionActivity extends ActionBarActivity {
     private LocationManager locationManager;
     private Criteria criteria;
     private String provider;
+    //Define the intents used.
+    Intent activityLocationSelector;
+    Intent activityTakePicture;
+
+    //Stuff for the edit text boxes...
+    EditText noteText;
+    String noteTextString;
+
 
 
     @Override
@@ -66,16 +75,18 @@ public class SelectionActivity extends ActionBarActivity {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
+        GlobalStateData.getInstance().setGiftOption("1");
         //Handle our button to donate.
-        Button buttonDonate = (Button) findViewById(R.id.button_donate);
+        Button locationButton = (Button)findViewById(R.id.buttonSelectLocation);
 
-        buttonDonate.setOnClickListener(new View.OnClickListener() {
+        locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callInfoActivity();
+                callLocationSelector();
             }
+
         });
+
 
         //Global info stuff.
         //Log.v("Global Data Test:SelectionActivity", GlobalStateData.getInstance().getNotes());
@@ -241,6 +252,28 @@ public class SelectionActivity extends ActionBarActivity {
         }
     }
 
+    void callLocationSelector(){
+        Log.v("InfoActivity:", "Call Location Selection");
+
+        //Save the information
+        noteText = (EditText) findViewById(R.id.editTextNote);
+        noteTextString = noteText.getText().toString();
+        Log.v("InfoActivity: noteTextString Value:",noteTextString);
+
+//        qrText = (EditText) findViewById(R.id.editTextQR);
+//        qrTextString = qrText.getText().toString();
+//        Log.v("InfoActivity: qrTextString Value:",qrTextString);
+
+
+
+//        GlobalStateData.getInstance().setQRCode(qrTextString);
+        GlobalStateData.getInstance().setNotes(noteTextString);
+        System.out.println("NOTES!!!");
+        System.out.println(GlobalStateData.getInstance().getNotes());
+
+        activityLocationSelector = new Intent(this,LocationSelectionActivity.class);
+        startActivity(activityLocationSelector);
+    }
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));

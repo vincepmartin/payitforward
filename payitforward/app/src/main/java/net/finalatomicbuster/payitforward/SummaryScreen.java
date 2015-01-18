@@ -173,6 +173,9 @@ public class SummaryScreen extends ActionBarActivity {
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost httppost = new HttpPost("http://helpinghand.me/postmates/checkstatus/");
 
+
+        System.out.println(GlobalStateData.getInstance().getOrderID());
+
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
         nameValuePairs.add(new BasicNameValuePair("id",GlobalStateData.getInstance().getOrderID()));
 
@@ -188,8 +191,7 @@ public class SummaryScreen extends ActionBarActivity {
             fee = String.format("$%.2f",Float.valueOf(responseString[1])/100 +
                     Float.valueOf(GlobalStateData.getInstance().getGiftOption()) * 5);
             System.out.println(responseString[1]);
-            courier = responseString[2];
-            System.out.println(responseString[2]);
+
 
             note = GlobalStateData.getInstance().getNotes();
 
