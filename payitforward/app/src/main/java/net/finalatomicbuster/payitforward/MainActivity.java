@@ -3,16 +3,26 @@ package net.finalatomicbuster.payitforward;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
+import com.getpebble.android.kit.PebbleKit;
+import com.getpebble.android.kit.PebbleKit.PebbleDataReceiver;
+import com.getpebble.android.kit.util.PebbleDictionary;
+
+import java.util.UUID;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -21,6 +31,25 @@ public class MainActivity extends ActionBarActivity {
     Intent activitySelectionIntent;
     Intent activitySettingsIntent;
 
+    //Define some PEBBLE stuff.
+    private static final UUID WATCHAPP_UUID = UUID.fromString("728a5d46-18fb-4e37-bfae-803b7367decd");
+    public static final String MY_PREFS_NAME = "settings";
+
+    private Handler handler = new Handler();
+    private PebbleDataReceiver appMessageReciever;
+
+
+    private static final int
+            KEY_BUTTON = 0,
+            KEY_VIBRATE = 1,
+            BUTTON_UP = 0,
+            BUTTON_SELECT = 1,
+            BUTTON_DOWN = 2;
+
+    //Let us define some static doodads for our app...
+            static final int OPTION_1 = 0;
+            static final int OPTION_2 = 1;
+            static final int OPTION_3 = 2;
 
 
 
@@ -42,6 +71,8 @@ public class MainActivity extends ActionBarActivity {
 
         //Setup the intent to call the activity selection screen.
 
+        //KEEP ALIVE FOR PEBBLE
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         //Setup our login button.
         Button loginButton = (Button)findViewById(R.id.button_login);
@@ -121,4 +152,50 @@ public class MainActivity extends ActionBarActivity {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
+    //PEBBLE ADDITION
+    protected void onResume() {
+            super.onResume();
+
+        // Define AppMessage behavior
+        if(appMessageReciever == null) {
+            appMessageReciever = new PebbleDataReceiver(WATCHAPP_UUID) {
+                @Override
+                public void receiveData(Context context, int transactionId, PebbleDictionary data) {
+
+                    // Always ACK
+                    PebbleKit.sendAckToPebble(context, transactionId);
+                    // What message was received?
+                    if(data.getInteger(KEY_BUTTON) != null) {
+                    // KEY_BUTTON was received, determine which button
+                        final int button = data.getInteger(KEY_BUTTON).intValue();
+                    // Update UI on correct thread
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                switch(button) {
+                                    case OPTION_1:
+                                        Log.v("Pebble", "Gift 1");
+                                        break;
+
+                                    case OPTION_2:
+                                        Log.v("Pebble", "Gift 2");
+                                        break;
+
+                                    case OPTION_3:
+                                        Log.v("Pebble", "Gift 3");
+                                        break;
+
+                                    default:
+                                        Toast.makeText(getApplicationContext(), "Unknown button: " + button, Toast.LENGTH_SHORT).show();
+                                        break;
+                                }
+                            }
+                        });
+                    }
+                }
+            };
+// Add AppMessage capabilities
+            PebbleKit.registerReceivedDataHandler(this, appMessageReciever);
+        }
+    }
 }
