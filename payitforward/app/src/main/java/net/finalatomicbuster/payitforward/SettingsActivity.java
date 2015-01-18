@@ -4,9 +4,33 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+
+import com.stripe.android.model.Card;
+
+import java.util.Date;
 
 
 public class SettingsActivity extends ActionBarActivity {
+
+    //Store data from the settings activity.
+    String creditCardName;
+    String creditCardNumber;
+    String creditCardCVC;
+    String creditCardDate;
+
+    int creditCardExpirationMonth;
+    int creditCardExpirationDay;
+
+    //Store our card information with stripe.
+    Card card;
+
+    //Declare editText stuff
+    EditText creditCardNumberText;
+    EditText creditCardCVCText;
+    EditText creditCardExpirationDateText;
+    EditText creditCardNameText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +59,31 @@ public class SettingsActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    void storeCardInfo(){
+
+    }
+
+    void grabInfoFromActivity(){
+        //Define the EditText box stuff.
+        creditCardNumberText = (EditText) findViewById(R.id.editTextCreditCardNumber);
+        creditCardCVCText = (EditText) findViewById(R.id.editTextCreditCardSecurityNumber);
+        creditCardExpirationDateText = (EditText) findViewById(R.id.editTextCreditCardExperationDate);
+        creditCardNameText = (EditText) findViewById(R.id.editTextCreditCardName);
+
+        //Grab the information from the text boxes.
+        creditCardName = creditCardNameText.getText().toString();
+        creditCardNumber = creditCardNumberText.getText().toString();
+        creditCardDate = creditCardExpirationDateText.getText().toString();
+        creditCardCVC = creditCardCVCText.getText().toString();
+
+        //Now write all this stuff to our GlobalStateData.
+        saveCreditData();
+
+    }
+
+    void saveCreditData(){
+
     }
 }
