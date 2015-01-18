@@ -175,14 +175,22 @@ public class MainActivity extends ActionBarActivity {
                                 switch(button) {
                                     case OPTION_1:
                                         Log.v("Pebble", "Gift 1");
+                                        GlobalStateData.getInstance().setGiftOption("1");
+                                        launchPebbleAutoGifter();
                                         break;
 
                                     case OPTION_2:
                                         Log.v("Pebble", "Gift 2");
+                                        GlobalStateData.getInstance().setGiftOption("2");
+                                        launchPebbleAutoGifter();
+
                                         break;
 
                                     case OPTION_3:
                                         Log.v("Pebble", "Gift 3");
+                                        GlobalStateData.getInstance().setGiftOption("3");
+                                        launchPebbleAutoGifter();
+
                                         break;
 
                                     default:
@@ -197,5 +205,14 @@ public class MainActivity extends ActionBarActivity {
 // Add AppMessage capabilities
             PebbleKit.registerReceivedDataHandler(this, appMessageReciever);
         }
+    }
+
+    void launchPebbleAutoGifter(){
+        //Enable the pebble.
+        GlobalStateData.getInstance().setPebbleEnabled(true);
+
+        Intent pebbleIntent = new Intent(this,SelectionActivity.class);
+        startActivity(pebbleIntent);
+
     }
 }

@@ -23,6 +23,10 @@ public class GlobalStateData {
     public String creditCardCVC;
     public String creditCardDate;
 
+    //Some pebble stuff.
+    public Boolean pebbleEnabled = false;
+
+
     public static GlobalStateData getInstance() {
         return ourInstance;
     }
@@ -103,6 +107,10 @@ public class GlobalStateData {
         creditCardDate = value;
     }
 
+    public void setPebbleEnabled(Boolean value){
+        pebbleEnabled = value;
+    }
+
     //Getters...
     public String getCreditCardName(){
         return this.creditCardName;
@@ -118,6 +126,10 @@ public class GlobalStateData {
 
     public String getCreditCardDate(){
         return this.creditCardDate;
+    }
+
+    public Boolean getPebbleEnabled(){
+        return pebbleEnabled;
     }
 
     public GlobalStateData() {

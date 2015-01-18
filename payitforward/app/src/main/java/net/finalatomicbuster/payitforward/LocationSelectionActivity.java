@@ -49,6 +49,7 @@ public class LocationSelectionActivity extends FragmentActivity {
     String giftOption;
     String locationCoords;
     String noteInfo;
+    Boolean usePebble = false;
 
     TextView qrCodeTextView;
     TextView giftChoiceTextView;
@@ -81,12 +82,16 @@ public class LocationSelectionActivity extends FragmentActivity {
                 callActivitySummary();
             }
         });
+
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         setUpMapIfNeeded();
+
+
     }
 
     /**
@@ -163,6 +168,8 @@ public class LocationSelectionActivity extends FragmentActivity {
             deliveryMarker = mMap.addMarker(new MarkerOptions().position(markerLocation).draggable(true));
             initialPlacementOfMarker = true;
         }
+
+
 
 
     }

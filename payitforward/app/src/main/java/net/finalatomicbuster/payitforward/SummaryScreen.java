@@ -60,7 +60,7 @@ public class SummaryScreen extends ActionBarActivity {
         updateData();
 //        postData();
         //setNotification();
-        //putConfirmOnScreen();
+        putConfirmOnScreen();
     }
 
 

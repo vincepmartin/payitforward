@@ -45,6 +45,7 @@ public class SelectionActivity extends ActionBarActivity {
     Boolean donationOption1 = true;
     Boolean donationOption2 = false;
     Boolean donationOption3 = false;
+    Boolean pebbleEnabled = false;
     Integer donationOptionChosen = 1;
     private LocationManager locationManager;
     private Criteria criteria;
@@ -78,7 +79,6 @@ public class SelectionActivity extends ActionBarActivity {
 
         //Global info stuff.
         //Log.v("Global Data Test:SelectionActivity", GlobalStateData.getInstance().getNotes());
-        //GlobalStateData.getInstance().setNotes("Doppelbanger");
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         criteria = new Criteria();
@@ -87,8 +87,9 @@ public class SelectionActivity extends ActionBarActivity {
         provider = locationManager.getBestProvider(criteria, false);
         Location location = locationManager.getLastKnownLocation(provider);
 
-        System.out.println(String.valueOf(location.getLatitude()) + ","
-                + String.valueOf(location.getLongitude()));
+        Log.v(String.valueOf(location.getLatitude()),"asfd");
+        //System.out.println(String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude()));
+
 
         int fee = getPostmatesQuote(
                 String.valueOf(location.getLatitude()) + ","
@@ -106,6 +107,19 @@ public class SelectionActivity extends ActionBarActivity {
         mid.setText(String.format("Generous: $%.2f", (cost + 10.0)));
         high.setText(String.format("Philanthropist: $%.2f", (cost + 15.0)));
 
+        //PEBBLE HANDLE!!!!
+        pebbleEnabled= GlobalStateData.getInstance().getPebbleEnabled();
+
+        if(pebbleEnabled)
+        {
+            //Lets set some default settings.
+            GlobalStateData.getInstance().setQRCode("54bb64fcdc26cc0c00571e61");
+            GlobalStateData.getInstance().setNotes("You Just helped your Favorite Person!");
+
+            //Intent to summary.
+            Intent summaryIntent = new Intent(this, SummaryScreen.class);
+            startActivity(summaryIntent);
+        }
 
     }
 
@@ -196,16 +210,6 @@ public class SelectionActivity extends ActionBarActivity {
 
         //Define the intent that will call the InfoActivity.
         Intent infoIntent = new Intent(this, InfoActivity.class);
-
-        //Add some data to our intent to pass to the next activity.
-        //infoIntent.putExtra("OptionSelected", Integer.toString(donationOptionChosen));
-        //Log.v("SelectionActivity Chosen and added to intent:", Integer.toString(donationOptionChosen));
-
-        //Lets now start the activity that I made above.
-
-        //Save the information that we put in.
-
-
         startActivity(infoIntent);
 
     }

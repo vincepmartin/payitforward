@@ -26,5 +26,4 @@ dependencies {
     compile 'com.stripe:stripe-android:+'
     compile 'uk.co.chrisjenx:calligraphy:2.0.0'
     compile 'com.getpebble:pebblekit:2.6.0'
-
 }
