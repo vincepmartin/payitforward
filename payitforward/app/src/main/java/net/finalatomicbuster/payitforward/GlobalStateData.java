@@ -17,6 +17,11 @@ public class GlobalStateData {
     public Double latitude;
     public String orderID;
 
+    //Stuff for billing... Yeah I know this is insecure :) It's just for the hackathon!
+    public String creditCardName;
+    public String creditCardNumber;
+    public String creditCardCVC;
+    public String creditCardDate;
 
     public static GlobalStateData getInstance() {
         return ourInstance;
@@ -78,7 +83,44 @@ public class GlobalStateData {
         return this.orderID;
     }
 
-    private GlobalStateData() {
+    //The setters and getters for the billing information.
+
+
+    //Setters...
+    public void setCreditCardName(String value){
+        creditCardName = value;
+    }
+
+    public void setCreditCardNumber(String value){
+        creditCardNumber = value;
+    }
+
+    public void setCreditCardCVC(String value){
+        creditCardCVC = value;
+    }
+
+    public void setCreditCardDate(String value){
+        creditCardDate = value;
+    }
+
+    //Getters...
+    public String getCreditCardName(){
+        return this.creditCardName;
+    }
+
+    public String getCreditCardNumber(){
+        return this.creditCardNumber;
+    }
+
+    public String getCreditCardCVC(){
+        return this.creditCardCVC;
+    }
+
+    public String getCreditCardDate(){
+        return this.creditCardDate;
+    }
+
+    public GlobalStateData() {
 
     }
 }
