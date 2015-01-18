@@ -6,7 +6,7 @@
     <string name="title_activity_selection">Select Donation</string>
     <string name="string_activity_selection_caption">Select Your Donation</string>
     <string name="string_donation1">Basic</string>
-    <string name="string_donation2">Giver</string>
+    <string name="string_donation2">Generous</string>
     <string name="string_donation3">Philanthropist</string>
     <string name="title_activity_info">Information</string>
     <string name="hello_world">Hello world!</string>

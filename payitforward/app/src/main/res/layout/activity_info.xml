@@ -10,26 +10,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="QR"
-        android:id="@+id/textViewQR"
-        android:layout_marginTop="63dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="QR Code"
-        android:ems="10"
-        android:id="@+id/editTextQR"
-        android:layout_below="@+id/textViewQR"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Note"
         android:id="@+id/textViewNote"
         android:layout_above="@+id/editTextNote"
@@ -40,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
-        android:text="Note"
+        android:hint="Note"
         android:ems="10"
         android:id="@+id/editTextNote"
         android:layout_centerVertical="true"

@@ -27,7 +27,9 @@ public class SummaryScreen extends ActionBarActivity {
 
         //Put stuff on the screen.
         grabData();
-        putDataOnScreen();
+        //postData();
+        //setNotification();
+        putConfirmOnScreen();
     }
 
 
@@ -60,7 +62,7 @@ public class SummaryScreen extends ActionBarActivity {
         noteInfo = GlobalStateData.getInstance().getNotes();
     }
 
-    void putDataOnScreen(){
+    void putConfirmOnScreen(){
         qrCodeTextView = (TextView) findViewById(R.id.textViewQR);
         giftChoiceTextView = (TextView) findViewById(R.id.textViewGiftChoice);
         locationCoordsTextView = (TextView) findViewById(R.id.textViewLocation);

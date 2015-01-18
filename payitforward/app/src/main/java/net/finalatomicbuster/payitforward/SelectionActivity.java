@@ -93,8 +93,8 @@ public class SelectionActivity extends ActionBarActivity {
         RadioButton high = (RadioButton) findViewById(R.id.radio_donation3);
 
         low.setText(String.format("Basic: $%.2f", (cost + 5.0)));
-        mid.setText(String.format("Giver: $%.2f", (cost + 10.0)));
-        high.setText(String.format("Giver: $%.2f", (cost + 15.0)));
+        mid.setText(String.format("Generous: $%.2f", (cost + 10.0)));
+        high.setText(String.format("Philanthropist: $%.2f", (cost + 15.0)));
 
 
     }
