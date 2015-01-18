@@ -44,8 +44,6 @@ public class InfoActivity extends ActionBarActivity {
 
         //Define the information for our buttons.
 
-        //Setup our picture button.
-        Button pictureButton = (Button)findViewById(R.id.buttonSnapPhoto);
 
         //Setup our location button.
         Button locationButton = (Button)findViewById(R.id.buttonSelectLocation);
