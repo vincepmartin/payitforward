@@ -1,5 +1,6 @@
 package net.finalatomicbuster.payitforward;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -9,6 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class InfoActivity extends ActionBarActivity {
@@ -21,14 +25,21 @@ public class InfoActivity extends ActionBarActivity {
     EditText noteText;
     String noteTextString;
 
-    EditText qrText;
-    String qrTextString;
+//    EditText qrText;
+//    String qrTextString;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath("fonts/comic-neue.ttf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
+
 
 
         //Define the information for our buttons.
@@ -81,13 +92,13 @@ public class InfoActivity extends ActionBarActivity {
         noteTextString = noteText.getText().toString();
         Log.v("InfoActivity: noteTextString Value:",noteTextString);
 
-        qrText = (EditText) findViewById(R.id.editTextQR);
-        qrTextString = qrText.getText().toString();
-        Log.v("InfoActivity: qrTextString Value:",qrTextString);
+//        qrText = (EditText) findViewById(R.id.editTextQR);
+//        qrTextString = qrText.getText().toString();
+//        Log.v("InfoActivity: qrTextString Value:",qrTextString);
 
 
 
-        GlobalStateData.getInstance().setQRCode(qrTextString);
+//        GlobalStateData.getInstance().setQRCode(qrTextString);
         GlobalStateData.getInstance().setNotes(noteTextString);
 
         activityLocationSelector = new Intent(this,LocationSelectionActivity.class);
@@ -95,5 +106,8 @@ public class InfoActivity extends ActionBarActivity {
     }
 
 
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 }

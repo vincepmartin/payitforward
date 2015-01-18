@@ -7,6 +7,7 @@
     tools:context="net.finalatomicbuster.payitforward.SelectionActivity">
 
     <TextView
+        fontPath="fonts/comic-neue.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -23,17 +24,23 @@
         android:orientation="vertical"
         android:checkedButton="@+id/radio_donation1">
 
-        <RadioButton android:id="@+id/radio_donation1"
+        <RadioButton
+            fontPath="fonts/comic-neue.ttf"
+            android:id="@+id/radio_donation1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/string_donation1"
             android:onClick="onRadioButtonClicked"/>
-        <RadioButton android:id="@+id/radio_donation2"
+        <RadioButton
+            fontPath="fonts/comic-neue.ttf"
+            android:id="@+id/radio_donation2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/string_donation2"
             android:onClick="onRadioButtonClicked"/>
-        <RadioButton android:id="@+id/radio_donation3"
+        <RadioButton
+            fontPath="fonts/comic-neue.ttf"
+            android:id="@+id/radio_donation3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/string_donation3"
@@ -41,6 +48,7 @@
     </RadioGroup>
 
     <Button
+        fontPath="fonts/comic-neue.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Donate"

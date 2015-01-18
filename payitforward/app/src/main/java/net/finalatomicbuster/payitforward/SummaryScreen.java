@@ -1,5 +1,6 @@
 package net.finalatomicbuster.payitforward;
 
+import android.content.Context;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -22,11 +23,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 
 public class SummaryScreen extends ActionBarActivity {
 
     String qrCode;
-    Integer giftChoice;
+    String giftOption;
     String locationCoords;
     String noteInfo;
 
@@ -42,12 +46,18 @@ public class SummaryScreen extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary_screen);
 
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath("fonts/comic-neue.ttf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
+
 //        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 //        StrictMode.setThreadPolicy(policy);
 
         //Put stuff on the screen.
         grabData();
-        //postData();
+        postData();
         //setNotification();
         //putConfirmOnScreen();
     }
@@ -79,7 +89,7 @@ public class SummaryScreen extends ActionBarActivity {
         System.out.println("QR");
         qrCode = GlobalStateData.getInstance().getQRCode();
         System.out.println("gift");
-        giftChoice = GlobalStateData.getInstance().getGiftOption();
+        giftOption = GlobalStateData.getInstance().getGiftOption();
         System.out.println("location");
         locationCoords = GlobalStateData.getInstance().getLocation();
         System.out.println("notes");
@@ -94,7 +104,7 @@ public class SummaryScreen extends ActionBarActivity {
 
 
         qrCodeTextView.setText(qrCode);
-        giftChoiceTextView.setText(giftChoice);
+        giftChoiceTextView.setText(giftOption);
         locationCoordsTextView.setText(locationCoords);
         noteInfoTextView.setText(noteInfo);
     }
@@ -102,21 +112,31 @@ public class SummaryScreen extends ActionBarActivity {
     void postData(){
 
         System.out.println("Posting");
+        System.out.println("QR");
         qrCode = GlobalStateData.getInstance().getQRCode();
-        giftChoice = GlobalStateData.getInstance().getGiftOption();
+        System.out.println("gift");
+        giftOption = GlobalStateData.getInstance().getGiftOption();
+        System.out.println("location");
         locationCoords = GlobalStateData.getInstance().getLocation();
+        System.out.println(locationCoords);
+        System.out.println("notes");
         noteInfo = GlobalStateData.getInstance().getNotes();
+        System.out.println("got data");
+
+        System.out.println(giftOption);
 
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost httppost = new HttpPost("http://helpinghand.me/postmates/placeorder/");
 
+        System.out.println("made client");
         // Add your data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
         nameValuePairs.add(new BasicNameValuePair("loc", locationCoords));
-        nameValuePairs.add(new BasicNameValuePair("gift", giftChoice.toString()));
+        nameValuePairs.add(new BasicNameValuePair("gift", giftOption));
         nameValuePairs.add(new BasicNameValuePair("paid", "paid"));
         nameValuePairs.add(new BasicNameValuePair("id", qrCode));
         nameValuePairs.add(new BasicNameValuePair("note", noteInfo));
+        System.out.println("set data");
 
 
         try {
@@ -138,4 +158,8 @@ public class SummaryScreen extends ActionBarActivity {
         }
     };
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 }
