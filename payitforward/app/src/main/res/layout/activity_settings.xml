@@ -4,9 +4,11 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#BDD2C7"
     tools:context="net.finalatomicbuster.payitforward.SettingsActivity">
 
-    <TextView
+    <TextView android:textColor="#01160F"
+        fontPath="fonts/comic-neue.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -16,7 +18,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp" />
 
-    <EditText
+    <EditText android:textColor="#01160F"
+        fontPath="fonts/comic-neue.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText"
@@ -24,7 +27,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="52dp" />
 
-    <EditText
+    <EditText android:textColor="#01160F"
+        fontPath="fonts/comic-neue.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
@@ -34,7 +38,8 @@
         android:layout_centerHorizontal="true"
         android:hint="Full Name" />
 
-    <EditText
+    <EditText android:textColor="#01160F"
+        fontPath="fonts/comic-neue.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
@@ -44,7 +49,8 @@
         android:layout_alignStart="@+id/editTextCreditCardName"
         android:hint="Credit Card #" />
 
-    <EditText
+    <EditText android:textColor="#01160F"
+        fontPath="fonts/comic-neue.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="date"
@@ -54,7 +60,8 @@
         android:layout_centerHorizontal="true"
         android:hint="Expiration Date" />
 
-    <EditText
+    <EditText android:textColor="#01160F"
+        fontPath="fonts/comic-neue.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
@@ -64,7 +71,8 @@
         android:layout_below="@+id/editTextCreditCardExperationDate"
         android:layout_alignStart="@+id/editTextCreditCardExperationDate" />
 
-    <Button
+    <Button android:textColor="#01160F"
+        fontPath="fonts/comic-neue.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save Settings"

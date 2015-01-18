@@ -15,6 +15,9 @@ import com.stripe.android.model.Card;
 
 import java.util.Date;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 
 public class SettingsActivity extends ActionBarActivity {
 
@@ -57,8 +60,15 @@ public class SettingsActivity extends ActionBarActivity {
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
 
+
             }
         });
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath("fonts/comic-neue.ttf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
     }
 
 
@@ -125,6 +135,11 @@ public class SettingsActivity extends ActionBarActivity {
         Log.v("Testing credit card: creditCardDate", creditCardDate);
         Log.v("Testing credit card: creditCardNumber", creditCardNumber);
 
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
 }
